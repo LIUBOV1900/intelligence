@@ -5,83 +5,83 @@
 <title>Тренажёр нейронной сети</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#12122a,#0d1b30);color:#e4e4e4;height:100vh;overflow:hidden}
-  h1{text-align:center;font-size:1.3em;margin:6px 0 2px;background:linear-gradient(90deg,#35e0ff,#ff4fa3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .subtitle{text-align:center;color:#889;font-size:.75em;margin-bottom:8px}
-  .container{width:calc(100vw - 16px);height:calc(100vh - 70px);margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:10px;padding:0 8px}
-  .panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;display:flex;flex-direction:column;overflow:hidden}
-  .panel h2{font-size:.85em;margin-bottom:6px;color:#35e0ff}
-  #drawCanvas{background:#000;border-radius:6px;cursor:crosshair;display:block;margin:0 auto;touch-action:none;width:240px;height:240px}
-  .controls{display:flex;gap:6px;margin-top:8px;justify-content:center;flex-wrap:wrap}
-  button{background:linear-gradient(135deg,#4361ee,#3a0ca3);color:#fff;border:none;padding:7px 12px;border-radius:6px;cursor:pointer;font-size:.8em;transition:.15s}
-  button:hover{transform:translateY(-1px);box-shadow:0 3px 12px rgba(67,97,238,.5)}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#12122a,#0d1b30);color:#e4e4e4;height:100vh;overflow:hidden;padding:15px}
+  h1{text-align:center;font-size:1.8em;margin-bottom:6px;background:linear-gradient(90deg,#35e0ff,#ff4fa3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .subtitle{text-align:center;color:#889;font-size:.85em;margin-bottom:12px}
+  .container{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:15px;height:calc(100vh - 70px)}
+  .panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:15px;display:flex;flex-direction:column;overflow:hidden}
+  .panel h2{font-size:1em;margin-bottom:10px;color:#35e0ff}
+  #drawCanvas{background:#000;border-radius:8px;cursor:crosshair;display:block;margin:0 auto;touch-action:none;width:280px;height:280px}
+  .controls{display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap}
+  button{background:linear-gradient(135deg,#4361ee,#3a0ca3);color:#fff;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:.9em;transition:.15s}
+  button:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(67,97,238,.5)}
   button.danger{background:linear-gradient(135deg,#f72585,#b5179e)}
   button.success{background:linear-gradient(135deg,#06ffa5,#06b87a);color:#000}
   button.warning{background:linear-gradient(135deg,#ffbe0b,#fb5607)}
-  .digit-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px}
-  .digit-btn{padding:9px;font-size:.95em;font-weight:bold;position:relative}
-  .digit-btn .count{position:absolute;top:2px;right:3px;font-size:.55em;background:#06ffa5;color:#000;border-radius:6px;padding:0 4px}
-  #networkCanvas{width:100%;height:340px;background:#05070f;border:1px solid rgba(53,224,255,.15);border-radius:8px;cursor:pointer;flex-shrink:0}
-  .viz-controls{display:flex;gap:10px;flex-wrap:wrap;font-size:.7em;color:#b8c5d6;margin-top:6px;align-items:center}
-  .viz-controls label{display:flex;gap:3px;align-items:center;cursor:pointer}
-  .legend{display:flex;gap:10px;font-size:.65em;margin-top:5px;color:#cfd8e3;flex-wrap:wrap}
-  .legend span{display:flex;align-items:center;gap:4px}
-  .swatch{width:14px;height:3px;border-radius:2px;display:inline-block}
-  #netHint{font-size:.7em;color:#ffd166;margin-top:5px;min-height:2.2em;line-height:1.3}
-  .input-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;width:110px;margin:5px auto}
-  .input-cell{aspect-ratio:1;background:#000;border-radius:1px}
-  .result{text-align:center;font-size:2.2em;font-weight:bold;margin:5px 0;color:#06ffa5;min-height:1em}
-  .probabilities{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-top:5px}
-  .prob-bar{background:rgba(255,255,255,.1);border-radius:3px;text-align:center;font-size:.65em;position:relative;overflow:hidden;height:35px}
+  .digit-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+  .digit-btn{padding:12px;font-size:1.1em;font-weight:bold;position:relative}
+  .digit-btn .count{position:absolute;top:2px;right:3px;font-size:.6em;background:#06ffa5;color:#000;border-radius:8px;padding:1 5px}
+  #networkCanvas{width:100%;height:380px;background:#05070f;border:1px solid rgba(53,224,255,.15);border-radius:8px;cursor:pointer;flex-shrink:0}
+  .viz-controls{display:flex;gap:15px;flex-wrap:wrap;font-size:.8em;color:#b8c5d6;margin-top:10px;align-items:center}
+  .viz-controls label{display:flex;gap:5px;align-items:center;cursor:pointer}
+  .legend{display:flex;gap:15px;font-size:.75em;margin-top:8px;color:#cfd8e3;flex-wrap:wrap}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .swatch{width:20px;height:4px;border-radius:2px;display:inline-block}
+  #netHint{font-size:.8em;color:#ffd166;margin-top:8px;min-height:2.6em;line-height:1.4}
+  .input-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;width:140px;margin:8px auto}
+  .input-cell{aspect-ratio:1;background:#000;border-radius:2px}
+  .result{text-align:center;font-size:2.5em;font-weight:bold;margin:10px 0;color:#06ffa5;min-height:1.2em}
+  .probabilities{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-top:8px}
+  .prob-bar{background:rgba(255,255,255,.1);border-radius:4px;text-align:center;font-size:.8em;position:relative;overflow:hidden;height:45px}
   .prob-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,#35e0ff,#4361ee);opacity:.65;transition:height .3s}
   .prob-label{position:relative;z-index:1}
-  .info{background:rgba(53,224,255,.08);border-left:2px solid #35e0ff;padding:5px 8px;border-radius:3px;margin-top:6px;font-size:.68em;line-height:1.35;color:#b8c5d6}
-  .status{text-align:center;padding:4px;border-radius:4px;margin-top:5px;font-size:.7em;background:rgba(255,255,255,.05)}
-  .stats{display:flex;justify-content:space-around;margin-top:5px;padding:5px;background:rgba(255,255,255,.05);border-radius:4px;font-size:.72em}
-  .stat-item{text-align:center}.stat-value{font-size:1.3em;font-weight:bold;color:#06ffa5}
-  @media(max-width:1000px){.container{grid-template-columns:1fr;height:auto}.body{overflow:auto;height:auto}}
+  .info{background:rgba(53,224,255,.08);border-left:3px solid #35e0ff;padding:8px 12px;border-radius:4px;margin-top:10px;font-size:.8em;line-height:1.4;color:#b8c5d6}
+  .status{text-align:center;padding:7px;border-radius:6px;margin-top:8px;font-size:.8em;background:rgba(255,255,255,.05)}
+  .stats{display:flex;justify-content:space-around;margin-top:10px;padding:8px;background:rgba(255,255,255,.05);border-radius:6px;font-size:.85em}
+  .stat-item{text-align:center}.stat-value{font-size:1.5em;font-weight:bold;color:#06ffa5}
+  @media(max-width:1100px){body{overflow:auto;height:auto}.container{grid-template-columns:1fr;height:auto}}
 </style>
 </head>
 <body>
-<h1>🧠 Тренажёр нейронной сети</h1>
-<p class="subtitle">Нарисуйте цифру → обучите → нажмите на нейрон</p>
+<h1> Тренажёр нейронной сети</h1>
+<p class="subtitle">Нарисуйте цифру → обучите → нажмите на нейрон, чтобы увидеть его связи</p>
 
 <div class="container">
   <div class="panel">
-    <h2>✏️ Холст</h2>
-    <canvas id="drawCanvas" width="240" height="240"></canvas>
+    <h2>✏️ Холст для рисования</h2>
+    <canvas id="drawCanvas" width="280" height="280"></canvas>
     <div class="controls">
       <button class="success" onclick="recognize()">🔍 Распознать</button>
-      <button class="danger" onclick="clearCanvas()">Очистить</button>
-      <button class="warning" onclick="resetNetwork()">Сбросить</button>
+      <button class="danger" onclick="clearCanvas()">🗑️ Очистить</button>
+      <button class="warning" onclick="resetNetwork()">🔄 Сбросить сеть</button>
     </div>
     <div class="stats">
-      <div class="stat-item"><div class="stat-value" id="trainedCount">0</div><div>Примеров</div></div>
-      <div class="stat-item"><div class="stat-value" id="lastDigit">—</div><div>Последняя</div></div>
+      <div class="stat-item"><div class="stat-value" id="trainedCount">0</div><div>Примеров в памяти</div></div>
+      <div class="stat-item"><div class="stat-value" id="lastDigit">—</div><div>Последняя цифра</div></div>
     </div>
-    <div class="info"><b>Как:</b> нарисуйте цифру → нажмите её номер. Сеть хранит все примеры и переобучается на них.</div>
-    <h2 style="margin-top:8px">📚 Обучить как цифру:</h2>
+    <div class="info"><b>Как пользоваться:</b> нарисуйте цифру → нажмите её номер. Сеть хранит все примеры и переобучается на них. 3–5 разных вариантов каждой цифры дадут хороший результат.</div>
+    <h2 style="margin-top:12px"> Обучить как цифру (число в углу — количество примеров):</h2>
     <div class="digit-buttons" id="digitButtons"></div>
-    <div class="status" id="status">Готово. Нарисуйте цифру.</div>
+    <div class="status" id="status">Готово к работе. Нарисуйте цифру.</div>
   </div>
 
   <div class="panel">
-    <h2>🧬 Сеть: 25 → 32 → 10</h2>
+    <h2>🧬 Визуализация нейронной сети: 25 → 32 → 10</h2>
     <canvas id="networkCanvas"></canvas>
 
     <div class="legend">
-      <span><i class="swatch" style="background:#35e0ff;box-shadow:0 0 6px #35e0ff"></i>возбуждающая (+)</span>
-      <span><i class="swatch" style="background:#ff4fa3;box-shadow:0 0 6px #ff4fa3"></i>тормозящая (−)</span>
-      <span>толщина / яркость = сила веса</span>
+      <span><i class="swatch" style="background:#35e0ff;box-shadow:0 0 8px #35e0ff"></i>возбуждающая связь (+)</span>
+      <span><i class="swatch" style="background:#ff4fa3;box-shadow:0 0 8px #ff4fa3"></i>тормозящая связь (−)</span>
+      <span>толщина и яркость = сила веса</span>
     </div>
     <div class="viz-controls">
-      <label><input type="checkbox" id="onlyStrong" checked> Сильные связи</label>
-      <label><input type="checkbox" id="animate" checked> Импульсы</label>
-      <label><input type="checkbox" id="showWeights" checked> Веса</label>
+      <label><input type="checkbox" id="onlyStrong" checked> Только сильные связи</label>
+      <label><input type="checkbox" id="animate" checked> Анимация импульсов</label>
+      <label><input type="checkbox" id="showWeights" checked> Показывать веса</label>
     </div>
-    <div id="netHint">👆 Клик по нейрону — показать его связи</div>
+    <div id="netHint">👆 Кликните по нейрону — подсветятся его входы и выходы. Клик по пустому месту — снять выделение.</div>
 
-    <h2 style="margin-top:6px">👁️ Вход 5×5</h2>
+    <h2 style="margin-top:12px">👁️ Как сеть видит изображение (сетка 5×5)</h2>
     <div class="input-grid" id="inputGrid"></div>
     <div class="result" id="prediction">—</div>
     <div class="probabilities" id="probabilities"></div>
@@ -89,6 +89,7 @@
 </div>
 
 <script>
+/* ================= НЕЙРОННАЯ СЕТЬ ================= */
 class NeuralNetwork{
   constructor(layers){
     this.layers=layers;this.weights=[];this.biases=[];
@@ -132,8 +133,9 @@ let nn=new NeuralNetwork([25,32,10]);
 let trainingData=[],digitCounts=new Array(10).fill(0),lastTrainedDigit='—';
 let currentInput=new Array(25).fill(0);
 
+/* ================= ХОЛСТ ================= */
 const dc=document.getElementById('drawCanvas'),ctx=dc.getContext('2d');
-function initCanvas(){ctx.fillStyle='#000';ctx.fillRect(0,0,240,240);ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#fff';ctx.lineWidth=18;}
+function initCanvas(){ctx.fillStyle='#000';ctx.fillRect(0,0,280,280);ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#fff';ctx.lineWidth=22;}
 initCanvas();
 let drawing=false,lx=0,ly=0;
 function pos(e){const r=dc.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return[(t.clientX-r.left)*dc.width/r.width,(t.clientY-r.top)*dc.height/r.height];}
@@ -144,10 +146,10 @@ dc.onmousedown=down;dc.onmousemove=move;dc.onmouseup=up;dc.onmouseleave=up;
 dc.ontouchstart=down;dc.ontouchmove=move;dc.ontouchend=up;
 
 function getImageData5x5(){
-  const d=ctx.getImageData(0,0,240,240).data,g=[],c=48;
+  const d=ctx.getImageData(0,0,280,280).data,g=[],c=56;
   for(let y=0;y<5;y++)for(let x=0;x<5;x++){
     let s=0,n=0;
-    for(let yy=y*c;yy<(y+1)*c;yy++)for(let xx=x*c;xx<(x+1)*c;xx++){s+=d[(yy*240+xx)*4];n++;}
+    for(let yy=y*c;yy<(y+1)*c;yy++)for(let xx=x*c;xx<(x+1)*c;xx++){s+=d[(yy*280+xx)*4];n++;}
     g.push(s/n/255);
   }
   return g;
@@ -162,10 +164,10 @@ updateInputGrid();
 
 function clearCanvas(){initCanvas();updateInputGrid();document.getElementById('prediction').textContent='—';
   document.querySelectorAll('.prob-fill').forEach(e=>e.style.height='0%');
-  document.querySelectorAll('.prob-label').forEach(e=>e.textContent='');setStatus('Очищено.');}
-function resetNetwork(){if(!confirm('Сбросить сеть и память?'))return;
+  document.querySelectorAll('.prob-label').forEach(e=>e.textContent='');setStatus('Холст очищен.');}
+function resetNetwork(){if(!confirm('Сбросить сеть и всю память примеров?'))return;
   nn=new NeuralNetwork([25,32,10]);trainingData=[];digitCounts=new Array(10).fill(0);lastTrainedDigit='—';
-  selected=null;updateStats();updateButtons();setStatus('Сеть сброшена.');}
+  selected=null;updateStats();updateButtons();setStatus('Сеть полностью сброшена.');}
 function setStatus(m){document.getElementById('status').textContent=m;}
 function updateStats(){document.getElementById('trainedCount').textContent=trainingData.length;document.getElementById('lastDigit').textContent=lastTrainedDigit;}
 
@@ -178,15 +180,15 @@ function trainAs(digit){
     for(const s of [...trainingData].sort(()=>Math.random()-.5))nn.train(s.input,s.target,.1);
   lastTrainedDigit=digit;updateStats();updateButtons();
   const out=nn.forward(input)[2];updatePrediction(out);
-  setStatus(`✅ Пример "${digit}", всего ${trainingData.length}. Предсказание: ${out.indexOf(Math.max(...out))}`);
+  setStatus(`✅ Добавлен пример "${digit}", всего ${trainingData.length}. Текущее предсказание: ${out.indexOf(Math.max(...out))}`);
 }
 function recognize(){
   const input=getImageData5x5();currentInput=input;
   if(input.reduce((a,b)=>a+b,0)<.05){setStatus('️ Нарисуйте цифру!');return;}
-  if(!trainingData.length){setStatus('️ Сначала обучите сеть!');return;}
+  if(!trainingData.length){setStatus('️ Сначала обучите сеть хотя бы на одном примере!');return;}
   const out=nn.forward(input)[2],p=out.indexOf(Math.max(...out));
   document.getElementById('prediction').textContent=`${p} (${(out[p]*100).toFixed(1)}%)`;
-  updatePrediction(out);setStatus(`🎯 ${p} — уверенность ${(out[p]*100).toFixed(1)}%`);
+  updatePrediction(out);setStatus(`🎯 Распознано: ${p} — уверенность ${(out[p]*100).toFixed(1)}%`);
 }
 function updatePrediction(out){
   document.querySelectorAll('.prob-label').forEach((e,i)=>e.textContent=(out[i]*100).toFixed(0));
@@ -194,14 +196,15 @@ function updatePrediction(out){
 }
 const pd=document.getElementById('probabilities');
 for(let i=0;i<10;i++){const b=document.createElement('div');b.className='prob-bar';
-  b.innerHTML=`<div class="prob-fill" style="height:0%"></div><div class="prob-label"></div><div style="position:relative;z-index:1;font-size:.6em;color:#889">${i}</div>`;pd.appendChild(b);}
+  b.innerHTML=`<div class="prob-fill" style="height:0%"></div><div class="prob-label"></div><div style="position:relative;z-index:1;font-size:.7em;color:#889">${i}</div>`;pd.appendChild(b);}
 const db=document.getElementById('digitButtons');
 for(let i=0;i<10;i++){const b=document.createElement('button');b.className='digit-btn';b.innerHTML=`${i}<span class="count" id="count-${i}">0</span>`;b.onclick=()=>trainAs(i);db.appendChild(b);}
 function updateButtons(){for(let i=0;i<10;i++)document.getElementById('count-'+i).textContent=digitCounts[i];}
 
+/* ================= ВИЗУАЛИЗАЦИЯ ================= */
 const nc=document.getElementById('networkCanvas'),nx=nc.getContext('2d');
 let W=0,H=0,positions=[],activations=null,selected=null,hovered=null;
-const layers=[25,32,10],layerNames=['ВХОД 5×5','СКРЫТЫЙ','ВЫХОД'];
+const layers=[25,32,10],layerNames=['ВХОД 5×5','СКРЫТЫЙ СЛОЙ (32 нейрона)','ВЫХОД (0-9)'];
 const ABS_SCALE=2.0;
 
 function resize(){
@@ -212,15 +215,15 @@ window.addEventListener('resize',resize);
 
 function calcPositions(){
   activations=nn.forward(currentInput);positions=[];
-  const xs=[W*.13,W*.48,W*.84];
+  const xs=[W*.12,W*.5,W*.88];
   for(let l=0;l<3;l++){
     const arr=[];
     if(l===0){
-      const size=Math.min(120,H*.45),sx=xs[0]-size/2,sy=H/2-size/2+10,cell=size/5;
-      for(let i=0;i<25;i++)arr.push({x:sx+(i%5)*cell+cell/2,y:sy+Math.floor(i/5)*cell+cell/2,r:5.5});
+      const size=Math.min(140,H*.5),sx=xs[0]-size/2,sy=H/2-size/2+10,cell=size/5;
+      for(let i=0;i<25;i++)arr.push({x:sx+(i%5)*cell+cell/2,y:sy+Math.floor(i/5)*cell+cell/2,r:6});
     }else{
-      const n=layers[l],span=H*.82,start=(H-span)/2+10;
-      for(let i=0;i<n;i++)arr.push({x:xs[l],y:start+i*span/(n-1),r:l===1?4.5:9});
+      const n=layers[l],span=H*.85,start=(H-span)/2+10;
+      for(let i=0;i<n;i++)arr.push({x:xs[l],y:start+i*span/(n-1),r:l===1?5:10});
     }
     positions.push(arr);
   }
@@ -229,7 +232,7 @@ function calcPositions(){
 function strongEdges(){
   const res=[];
   for(let l=0;l<2;l++){
-    const keep=new Set(),k=l===0?4:5;
+    const keep=new Set(),k=l===0?5:6;
     for(let j=0;j<layers[l+1];j++){
       const list=[];
       for(let i=0;i<layers[l];i++)list.push({i,j,w:nn.weights[l][j][i]});
@@ -246,9 +249,9 @@ function strongEdges(){
 function relatedEdges(l,i){
   const out=[];
   if(l>0){const a=[];for(let k=0;k<layers[l-1];k++)a.push({l:l-1,i:k,j:i,w:nn.weights[l-1][i][k]});
-    a.sort((x,y)=>Math.abs(y.w)-Math.abs(x.w));out.push(...a.slice(0,7));}
+    a.sort((x,y)=>Math.abs(y.w)-Math.abs(x.w));out.push(...a.slice(0,8));}
   if(l<2){const a=[];for(let j=0;j<layers[l+1];j++)a.push({l,i,j,w:nn.weights[l][j][i]});
-    a.sort((x,y)=>Math.abs(y.w)-Math.abs(x.w));out.push(...a.slice(0,7));}
+    a.sort((x,y)=>Math.abs(y.w)-Math.abs(x.w));out.push(...a.slice(0,8));}
   return out;
 }
 function stroke(e,color,alpha,width,glow=0){
@@ -269,87 +272,93 @@ function drawNetwork(time){
   const related=focus?relatedEdges(focus.l,focus.i):[];
   const strong=strongEdges();
 
-  [W*.13,W*.48,W*.84].forEach((x,l)=>{
-    nx.fillStyle='rgba(53,224,255,.03)';
-    nx.fillRect(x-(l===0?68:26),28,l===0?136:52,H-52);
-    nx.fillStyle='#35e0ff';nx.font='bold 9px sans-serif';nx.textAlign='center';
-    nx.fillText(layerNames[l],x,16);
+  // фон-слои
+  [W*.12,W*.5,W*.88].forEach((x,l)=>{
+    nx.fillStyle='rgba(53,224,255,.04)';
+    nx.fillRect(x-(l===0?80:30),35,l===0?160:60,H-70);
+    nx.fillStyle='#35e0ff';nx.font='bold 11px sans-serif';nx.textAlign='center';
+    nx.fillText(layerNames[l],x,22);
   });
 
+  // базовые связи
   const edges=document.getElementById('onlyStrong').checked?strong.flat():(()=>{
     const a=[];for(let l=0;l<2;l++)for(let j=0;j<layers[l+1];j++)for(let i=0;i<layers[l];i++)a.push({l,i,j,w:nn.weights[l][j][i]});return a;
   })();
 
   for(const e of edges){
     const norm=Math.min(1,Math.abs(e.w)/ABS_SCALE);
-    let alpha=.08+.85*Math.pow(norm,.7);
-    let width=.3+2.5*norm;
+    let alpha=.1+.85*Math.pow(norm,.7);
+    let width=.4+3*norm;
     if(focus){
       const isR=related.some(r=>r.l===e.l&&r.i===e.i&&r.j===e.j);
-      if(!isR){alpha*=.05;width*=.5;}
+      if(!isR){alpha*=.06;width*=.5;}
     }
     stroke(e,color(e.w),alpha,width);
   }
 
+  // подсвеченные связи + подписи весов
   const weightLabels=[];
   for(const e of related){
     const norm=Math.min(1,Math.abs(e.w)/ABS_SCALE);
-    const g=stroke(e,color(e.w),1,1.6+2.4*norm,10);
+    const g=stroke(e,color(e.w),1,2+2.5*norm,12);
     if(document.getElementById('showWeights').checked)
       weightLabels.push({x:(g.x1+g.x2)/2,y:(g.y1+g.y2)/2,w:e.w,c:color(e.w)});
   }
-  weightLabels.sort((a,b)=>Math.abs(b.w)-Math.abs(a.w)).slice(0,8).forEach(t=>{
+  weightLabels.sort((a,b)=>Math.abs(b.w)-Math.abs(a.w)).slice(0,10).forEach(t=>{
     const s=(t.w>=0?'+':'')+t.w.toFixed(2);
-    nx.font='bold 9px monospace';const tw=nx.measureText(s).width;
-    nx.fillStyle='rgba(0,0,0,.85)';nx.fillRect(t.x-tw/2-3,t.y-7,tw+6,13);
-    nx.fillStyle=t.c;nx.textAlign='center';nx.fillText(s,t.x,t.y+3);
+    nx.font='bold 11px monospace';const tw=nx.measureText(s).width;
+    nx.fillStyle='rgba(0,0,0,.9)';nx.fillRect(t.x-tw/2-4,t.y-8,tw+8,15);
+    nx.fillStyle=t.c;nx.textAlign='center';nx.fillText(s,t.x,t.y+4);
   });
 
+  // бегущие импульсы
   if(document.getElementById('animate').checked){
     let flow=related.length?related:strong.flat()
       .map(e=>({...e,power:Math.abs(e.w)*(activations[e.l][e.i]||0)}))
-      .sort((a,b)=>b.power-a.power).slice(0,14);
+      .sort((a,b)=>b.power-a.power).slice(0,16);
     flow.forEach((e,n)=>{
-      const t=((time/1500)+n*.13)%1;
+      const t=((time/1500)+n*.12)%1;
       const a=positions[e.l][e.i],b=positions[e.l+1][e.j];
       const x=a.x+(b.x-a.x)*t,y=a.y+(b.y-a.y)*t;
       const strength=Math.min(1,Math.abs(e.w)/ABS_SCALE);
-      nx.globalAlpha=.25+.75*strength;nx.fillStyle=e.w>=0?'#aef6ff':'#ffb3d6';
-      nx.shadowColor=nx.fillStyle;nx.shadowBlur=9;
-      nx.beginPath();nx.arc(x,y,1.2+2.2*strength,0,Math.PI*2);nx.fill();
+      nx.globalAlpha=.3+.7*strength;nx.fillStyle=e.w>=0?'#aef6ff':'#ffb3d6';
+      nx.shadowColor=nx.fillStyle;nx.shadowBlur=10;
+      nx.beginPath();nx.arc(x,y,1.5+2.5*strength,0,Math.PI*2);nx.fill();
       nx.shadowBlur=0;nx.globalAlpha=1;
     });
   }
 
+  // нейроны
   for(let l=0;l<3;l++)for(let i=0;i<positions[l].length;i++){
     const p=positions[l][i],act=activations[l][i]||0;
     const isFocus=focus&&focus.l===l&&focus.i===i;
     const isNeighbor=related.some(e=>(e.l===l&&e.i===i)||(e.l+1===l&&e.j===i));
 
-    const g=nx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-    g.addColorStop(0,`rgba(6,255,165,${.2+act*.8})`);g.addColorStop(1,'rgba(6,255,165,0)');
-    nx.fillStyle=g;nx.beginPath();nx.arc(p.x,p.y,p.r*3,0,Math.PI*2);nx.fill();
+    const g=nx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.5);
+    g.addColorStop(0,`rgba(6,255,165,${.25+act*.75})`);g.addColorStop(1,'rgba(6,255,165,0)');
+    nx.fillStyle=g;nx.beginPath();nx.arc(p.x,p.y,p.r*3.5,0,Math.PI*2);nx.fill();
 
     nx.fillStyle=`rgb(${Math.floor(25+act*230)},${Math.floor(110+act*145)},${Math.floor(140+act*115)})`;
-    nx.strokeStyle=isFocus?'#ffd166':isNeighbor?'#ffffff':'rgba(255,255,255,.55)';
-    nx.lineWidth=isFocus?2.5:1;
-    nx.beginPath();nx.arc(p.x,p.y,p.r+(isFocus?1.5:0),0,Math.PI*2);nx.fill();nx.stroke();
+    nx.strokeStyle=isFocus?'#ffd166':isNeighbor?'#ffffff':'rgba(255,255,255,.6)';
+    nx.lineWidth=isFocus?3:1.2;
+    nx.beginPath();nx.arc(p.x,p.y,p.r+(isFocus?2:0),0,Math.PI*2);nx.fill();nx.stroke();
 
     if(l===2){
-      nx.fillStyle=act>.15?'#06ffa5':'#7c8ba1';nx.font='bold 10px sans-serif';nx.textAlign='left';
-      nx.fillText(`${i}·${Math.round(act*100)}%`,p.x+p.r+4,p.y+3);
+      nx.fillStyle=act>.15?'#06ffa5':'#7c8ba1';nx.font='bold 12px sans-serif';nx.textAlign='left';
+      nx.fillText(`${i} · ${Math.round(act*100)}%`,p.x+p.r+6,p.y+5);
     }else if(l===1&&(isFocus||isNeighbor||i%8===0)){
-      nx.fillStyle='#8fa3bd';nx.font='7px monospace';nx.textAlign='right';nx.fillText(i,p.x-7,p.y+2);
+      nx.fillStyle='#8fa3bd';nx.font='9px monospace';nx.textAlign='right';nx.fillText(i,p.x-10,p.y+4);
     }
   }
   requestAnimationFrame(drawNetwork);
 }
 
+/* интерактив */
 function pick(e){
   const r=nc.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
   let best=null,bd=1e9;
   positions.forEach((layer,l)=>layer.forEach((p,i)=>{
-    const d=Math.hypot(p.x-x,p.y-y);if(d<Math.max(11,p.r+5)&&d<bd){bd=d;best={l,i};}
+    const d=Math.hypot(p.x-x,p.y-y);if(d<Math.max(13,p.r+6)&&d<bd){bd=d;best={l,i};}
   }));
   return best;
 }
@@ -358,11 +367,11 @@ nc.onmousemove=e=>{hovered=pick(e);nc.style.cursor=hovered?'pointer':'default';i
 nc.onmouseleave=()=>{hovered=null;if(!selected)updateHint();};
 function updateHint(){
   const f=selected||hovered,el=document.getElementById('netHint');
-  if(!f){el.textContent='👆 Клик по нейрону — показать его связи. Клик по пустому месту — снять.';return;}
+  if(!f){el.textContent='👆 Кликните по любому нейрону — подсветятся все его входящие и выходящие связи. Клик по пустому месту снимет выделение.';return;}
   const a=activations[f.l][f.i],rel=relatedEdges(f.l,f.i);
-  const name=f.l===0?`пиксель #${f.i+1}`:f.l===1?`нейрон #${f.i}`:`цифра ${f.i}`;
+  const name=f.l===0?`входной пиксель #${f.i+1}`:f.l===1?`скрытый нейрон #${f.i}`:`выходной нейрон (цифра ${f.i})`;
   const top=[...rel].sort((x,y)=>Math.abs(y.w)-Math.abs(x.w))[0];
-  el.textContent=`🎯 ${name} · активация ${(a*100).toFixed(0)}% · сильнейший вес: ${top?(top.w>=0?'+':'')+top.w.toFixed(3):'—'}. Золотое кольцо — выбранный.`;
+  el.textContent=`🎯 ${name} · текущая активация: ${(a*100).toFixed(0)}% · сильнейшая связь: ${top?(top.w>=0?'+':'')+top.w.toFixed(3):'—'}. Золотое кольцо — выбранный нейрон.`;
 }
 resize();requestAnimationFrame(drawNetwork);
 </script>
